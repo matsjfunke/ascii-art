@@ -2,10 +2,23 @@ use image::{GenericImageView, Pixel};
 
 fn main() {
     // Load the image
-    let img = image::open("fries.png").expect("Failed to open image");
+    // let img = image::open("fries.png").expect("Failed to open image");
+    let img = image::open("pastel_de_nata.png").expect("Failed to open image");
+    
+    // Determine the desired width for the ASCII art output
+    let desired_width = 80;
 
-    // Convert the image to grayscale
-    let gray_img = img.grayscale();
+    // Calculate the scaling factor to maintain aspect ratio
+    let (width, height) = img.dimensions();
+    let aspect_ratio = height as f32 / width as f32;
+    println!("aspect ratio : {}", aspect_ratio);
+    let scaled_height = (desired_width as f32 * aspect_ratio).round() as u32;
+
+    // Resize the image while maintaining aspect ratio
+    let resized_img = img.resize_exact(desired_width, scaled_height, image::imageops::FilterType::Lanczos3);
+
+    // Convert the resized image to grayscale
+    let gray_img = resized_img.grayscale();
 
     // Define the ASCII character set, from light to dark
     let ascii_chars = vec![' ', '.', ':', '-', '=', '+', '*', '#', '%', '@'];
