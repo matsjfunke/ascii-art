@@ -2,8 +2,8 @@ use image::{GenericImageView};
 
 fn main() {
     // Load the image
-    let img = image::open("pastel_de_nata.png").expect("Failed to open image");
-    // let img = image::open("fries.png").expect("Failed to open image");
+    let img = image::open("images/goldie.jpg").expect("Failed to open image");
+    // let img = image::open("images/duck.png").expect("Failed to open image");
 
     // desired width for the ASCII art output
     let desired_width = 80;
